@@ -1,8 +1,6 @@
 #!/bin/sh
 
-
 #Functions
-
 help () { #Show Help Function
     echo "dangerzone.sh - Usage Instructions...\n"
     echo "dangerzone.sh config - Configure Develpoment Enviornment"
@@ -10,24 +8,24 @@ help () { #Show Help Function
 }
 
 up() { #Start Development Enviornment
-    if [ ! -e "dangerzone.conf" ]; then
+    if [ ! -e "etc/dangerzone.conf" ]; then
         echo "Yo! no config file."
         echo "Run: dangerzone.sh config"
         exit 1
     fi
 
-    GIT=`cat dangerzone.conf | grep "GIT"`
-    PORT=`cat dangerzone.conf | grep "PORT"`
+    GIT=`cat etc/dangerzone.conf | grep "GIT"`
+    PORT=`cat etc/dangerzone.conf | grep "PORT"`
     echo"$GIT\n$PORT"
 }
 
 config() {
     #Check for Pre-Existing
-    if [ -e "dangerzone.conf" ]; then
+    if [ -e "etc/dangerzone.conf" ]; then
         printf "Configuration File Exists... Delete (y/n)? :"
         read delete
         if [ $delete = "y" ]; then
-            rm dangerzone.conf
+            rm etc/dangerzone.conf
         else
             echo "Nevermind then....exiting"
             exit 1
@@ -40,8 +38,8 @@ config() {
     printf "Please enter your desired port for the rails app:"
     read railsPort
     echo "Merci...."
-
-    printf "GIT $gitlocation\nPORT $railsPort" > dangerzone.conf
+    printf "GIT $gitlocation\nPORT $railsPort" > etc/dangerzone.conf
+    echo "Configuration Complete!"
 }
 
 
