@@ -10,7 +10,15 @@ help () { #Show Help Function
 }
 
 up() { #Start Development Enviornment
-    echo ""
+    if [ ! -e "dangerzone.conf" ]; then
+        echo "Yo! no config file."
+        echo "Run: dangerzone.sh config"
+        exit 1
+    fi
+
+    GIT=`cat dangerzone.conf | grep "GIT"`
+    PORT=`cat dangerzone.conf | grep "PORT"`
+    echo"$GIT\n$PORT"
 }
 
 config() {
@@ -53,4 +61,8 @@ fi
 
 if [ "$1" = "config" ]; then
     config
+elif [ "$1" = "up" ]; then
+    up
+elif [ "$1" = "help" ]; then
+    help
 fi
