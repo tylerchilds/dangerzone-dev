@@ -16,7 +16,7 @@ up() { #Start Development Enviornment
 config() {
     #Check for Pre-Existing
     if [ -e "dangerzone.conf" ]; then
-        echo "Configuration File Exists... Delete (y/n)?"
+        printf "Configuration File Exists... Delete (y/n)? :"
         read delete
         if [ $delete = "y" ]; then
             rm dangerzone.conf
@@ -25,6 +25,15 @@ config() {
             exit 1
         fi
     fi
+    echo "Please Enter your git repository location:"
+    read gitLocation
+    echo "Gratzi...."
+
+    printf "Please enter your desired port for the rails app:"
+    read railsPort
+    echo "Merci...."
+
+    printf "GIT $gitlocation\nPORT $railsPort" > dangerzone.conf
 }
 
 
