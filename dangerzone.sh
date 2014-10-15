@@ -15,8 +15,9 @@ up() { #Start Development Enviornment
     fi
 
     GIT=`cat etc/dangerzone.conf | grep "GIT"`
+    GIT=`eval "echo $GIT"`
     PORT=`cat etc/dangerzone.conf | grep "PORT"`
-    echo "$GIT\n$PORT"
+    PORT=`eval "echo $PORT"`
 }
 
 config() {
