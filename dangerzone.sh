@@ -16,7 +16,7 @@ up() { #Start Development Enviornment
 
     GIT=`cat etc/dangerzone.conf | grep "GIT"`
     PORT=`cat etc/dangerzone.conf | grep "PORT"`
-    echo"$GIT\n$PORT"
+    echo "$GIT\n$PORT"
 }
 
 config() {
@@ -38,7 +38,7 @@ config() {
     printf "Please enter your desired port for the rails app:"
     read railsPort
     echo "Merci...."
-    printf "GIT $gitlocation\nPORT $railsPort" > etc/dangerzone.conf
+    printf "GIT $gitLocation\nPORT $railsPort" > etc/dangerzone.conf
     echo "Configuration Complete!"
 }
 
