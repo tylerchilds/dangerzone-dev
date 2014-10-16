@@ -9,7 +9,7 @@ help () { #Show Help Function
 up() { #Start Development Enviornment
 
     #Pull Latest Image
-    sudo docker pull bkreisel/bazaar-nginx
+    docker pull bkreisel/bazaar-nginx
 
     if [ ! -e "conf/dangerzone.conf" ]; then
         echo "Yo! no config file."
@@ -27,22 +27,25 @@ up() { #Start Development Enviornment
 
     #Start the engines
     echo "docker run -d -p $PORT:80 --name hermes-nginx -v $GIT:/app"
-    sudo docker run -d -p $PORT:80 --name hermes-nginx -v $GIT:/app bkreisel/bazaar-nginx
-    printf "\nContainers online, you are cleared for takeoff\n"
+    docker run -d -p $PORT:80 --name hermes-nginx -v $GIT:/app bkreisel/bazaar-nginx
+    
+    if [ $? -eq 0 ]; then
+        printf "\nContainers online, you are cleared for takeoff\n"
+    fi
 }
 
 down() {
-    prevContain=`sudo docker ps -a | awk '{ print $1" "$(NF) }' | grep 'hermes-nginx' | awk '{ print $(NF)}'`
-    prevContainRunning=`sudo docker ps | awk '{ print $1" "$(NF) }' | grep 'hermes-nginx' | awk '{ print $(NF) }'`
+    prevContain=`docker ps -a | awk '{ print $1" "$(NF) }' | grep 'hermes-nginx' | awk '{ print $(NF)}'`
+    prevContainRunning=`docker ps | awk '{ print $1" "$(NF) }' | grep 'hermes-nginx' | awk '{ print $(NF) }'`
     echo "$prevContain"
     if [  -n "$prevContain" ]; then
         #check for running container
         if [  -n "$prevContainRunning" ]; then
             echo "running container found"
-            sudo docker kill $prevContainRunning
+            docker kill $prevContainRunning
         fi
             echo "previous container found"
-            sudo docker rm $prevContain
+            docker rm $prevContain
     fi
 }
 
