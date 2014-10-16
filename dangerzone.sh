@@ -1,5 +1,4 @@
 #!/bin/sh
-
 #Functions
 help () { #Show Help Function
     echo "dangerzone.sh - Usage Instructions...\n"
@@ -29,13 +28,14 @@ up() { #Start Development Enviornment
     #Start the engines
     echo "docker run -d -p $PORT:80 --name hermes-nginx -v $GIT:/app"
     sudo docker run -d -p $PORT:80 --name hermes-nginx -v $GIT:/app bkreisel/bazaar-nginx
-    echo "Containers online, you are cleared for takeoff"
+    printf "\nContainers online, you are cleared for takeoff\n"
 }
 
 down() {
     prevContain=`sudo docker ps -a | awk '{ print $1" "$(NF) }' | grep 'hermes-nginx' | awk '{ print $(NF)}'`
     prevContainRunning=`sudo docker ps | awk '{ print $1" "$(NF) }' | grep 'hermes-nginx' | awk '{ print $(NF) }'`
-    if [  -n "$prevContainID" ]; then
+    echo "$prevContain"
+    if [  -n "$prevContain" ]; then
         #check for running container
         if [  -n "$prevContainRunning" ]; then
             echo "running container found"
