@@ -11,6 +11,7 @@ up() { #Start Development Enviornment
 
     #Pull Latest Image
     sudo docker pull bkreisel/bazaar-nginx
+
     if [ ! -e "etc/dangerzone.conf" ]; then
         echo "Yo! no config file."
         echo "Run: dangerzone.sh config"
@@ -90,4 +91,6 @@ elif [ "$1" = "help" ]; then
 elif [ "$1" = "down" ]; then
     down
     echo "Containers shipped to a far away port"
+elif [ "$1" = "me" ]; then
+    up
 fi
