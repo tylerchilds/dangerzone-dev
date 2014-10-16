@@ -11,15 +11,15 @@ up() { #Start Development Enviornment
     #Pull Latest Image
     sudo docker pull bkreisel/bazaar-nginx
 
-    if [ ! -e "etc/dangerzone.conf" ]; then
+    if [ ! -e "conf/dangerzone.conf" ]; then
         echo "Yo! no config file."
         echo "Run: dangerzone.sh config"
         exit 1
     fi
 
-    GIT=`cat etc/dangerzone.conf | grep "GIT" | awk '{print $2}'`
+    GIT=`cat conf/dangerzone.conf | grep "GIT" | awk '{print $2}'`
     GIT=`eval "echo $GIT"`
-    PORT=`cat etc/dangerzone.conf | grep "PORT" | awk '{print $2}'`
+    PORT=`cat conf/dangerzone.conf | grep "PORT" | awk '{print $2}'`
     PORT=`eval "echo $PORT"`
 
     #Check for Pre-existing enviornment
@@ -48,11 +48,11 @@ down() {
 
 config() {
     #Check for Pre-Existing
-    if [ -e "etc/dangerzone.conf" ]; then
+    if [ -e "conf/dangerzone.conf" ]; then
         printf "Configuration File Exists... Delete (y/n)? :"
         read delete
         if [ $delete = "y" ]; then
-            rm etc/dangerzone.conf
+            rm conf/dangerzone.conf
         else
             echo "Nevermind then....exiting"
             exit 1
@@ -65,7 +65,8 @@ config() {
     printf "Please enter your desired port for the rails app:"
     read railsPort
     echo "Merci...."
-    printf "GIT $gitLocation\nPORT $railsPort" > etc/dangerzone.conf
+    mkdir conf
+    printf "GIT $gitLocation\nPORT $railsPort" > conf/dangerzone.conf
     echo "Configuration Complete!"
 }
 
