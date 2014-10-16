@@ -12,6 +12,9 @@ modified to work with another if one was so inclined.
 
 ### Configuration
 `./dangerzone.sh config`
+
+
+Note: Run this script through sudo if you don't have elevated privileges for Docker
 ### Start Dev Enviornment
 `./dangerzone.sh up`
 
